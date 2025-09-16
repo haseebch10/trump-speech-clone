@@ -1,0 +1,49 @@
+{
+    "model": {
+      "name": "unsloth/Qwen2.5-7B-Instruct",
+      "max_seq_length": 2048,
+      "dtype": null,
+      "load_in_4bit": true,
+      "fp16": false,
+      "bf16": true
+    },
+    "lora": {
+      "enabled": true,
+      "rank": 16,
+      "alpha": 16,
+      "dropout": 0.1,
+      "target_modules": ["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"],
+      "lora_scaling": 1.0,
+      "trainable_layers": 1,
+      "bias": "none"
+    },
+    "training": {
+      "train_batch_size": 2,
+      "gradient_accumulation_steps": 4,
+      "warmup_steps": 5,
+      "max_steps": 70,
+      "learning_rate": 0.0002,
+      "weight_decay": 0.01,
+      "adam_epsilon": 1e-8,
+      "max_grad_norm": 1.0,
+      "logging_steps": 500,
+      "seed": 3407,
+      "dataset_num_proc": 2
+    },
+    "output": {
+      "output_dir": "outputs",
+      "save_model_steps": 1000,
+      "save_optimizer_steps": true
+    },
+    "data": {
+      "preprocessed_data": "u/home/chmu/trump_style/data/preprocessed_trump.csv"
+    },
+    "prompt": {
+      "train_template": "Below is a political statement in the style of Donald Trump.\n\n### Instruction:\n{}\n\n### Trump Speech:\n{}"
+    },
+    "logging": {
+      "log_dir": "logs",
+      "log_level": "INFO"
+    }
+  }
+  
